@@ -4,6 +4,8 @@ import css from './App.module.css';
 import { fetchImages } from 'services/api';
 import { ColorRing } from 'react-loader-spinner';
 import { Modal } from './Modal';
+import { ImageGallery } from './ImageGallery';
+import { Button } from './Button';
 
 export class App extends Component {
   state = {
@@ -46,6 +48,7 @@ export class App extends Component {
   onOpenModal = largeImageURL => {
     this.setState({ modal: { isOpen: true, modalData: largeImageURL } });
   };
+
   onCloseModal = () => {
     this.setState({ modal: { isOpen: false, modalData: null } });
   };
@@ -59,12 +62,7 @@ export class App extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.getImages();
-  // }
-
   render() {
-    const showGallery = Array.isArray(this.state.gallery);
     return (
       <div className={css.appContainer}>
         <Searchbar handleSearch={this.handleSearch} />
@@ -79,26 +77,12 @@ export class App extends Component {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
+        <ImageGallery
+          gallery={this.state.gallery}
+          onOpenModal={this.onOpenModal}
+        />
 
-        <ul className={css.imageGallery}>
-          {showGallery &&
-            this.state.gallery.map(image => (
-              <li
-                onClick={() => this.onOpenModal(image.largeImageURL)}
-                key={image.id}
-                className={css.imageGalleryItem}
-              >
-                <img
-                  className={css.imageGalleryItemImage}
-                  src={image.webformatURL}
-                  alt={image.tags}
-                />
-              </li>
-            ))}
-        </ul>
-        <button onClick={this.handleLoadMore} type="button">
-          Loade more
-        </button>
+        <Button handleLoadMore={this.handleLoadMore} />
         {this.state.modal.isOpen && (
           <Modal
             onCloseModal={this.onCloseModal}

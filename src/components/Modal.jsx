@@ -8,6 +8,20 @@ export class Modal extends Component {
     }
   };
 
+  onKeyDown = event => {
+    if (event.code === 'Escape') {
+      this.props.onCloseModal();
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
   render() {
     return (
       <div onClick={this.handleOverlay} className={css.overlay}>

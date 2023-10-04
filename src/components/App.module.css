@@ -76,7 +76,7 @@ img {
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  background-image: url('https://cdn1.iconfinder.com/data/icons/ionicons-fill-vol-2/512/search-512.png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -180,7 +180,9 @@ img {
 /*
 * Стили компонента Buton (Load more)
 */
-.Button {
+.buttonLoad {
+  max-width: 140px;
+  margin: 0 auto;
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;
